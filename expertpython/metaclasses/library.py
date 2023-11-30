@@ -1,24 +1,23 @@
 # Trying to hook into the creation process of classes using the builtins
 
 
-# The new way -> Meta classes
-class BaseMeta(type):
-    def __new__(cls, name, bases, body):
-        print("BaseMeta.__new__", cls, name, bases, body)
-        print(body)
-        name = body["__qualname__"]
+# # The new way -> Meta classes
+# class BaseMeta(type):
+#     def __new__(cls, name, bases, body):
+#         print("BaseMeta.__new__", cls, name, bases, body)
+#         print(body)
+#         name = body["__qualname__"]
 
-        if name != "Base" and "bar" not in body:
-            raise TypeError(
-                "Bad code, Check and make sure you class has the bar method"
-            )
+#         if name != "Base" and "bar" not in body:
+#             raise TypeError(
+#                 "Bad code, Check and make sure you class has the bar method"
+#             )
+#         return super().__new__(cls, name, bases, body)
 
-        return super().__new__(cls, name, bases, body)
 
-
-class Base(metaclass=BaseMeta):
-    def foo(self):
-        return self.bar
+# class Base(metaclass=BaseMeta):
+#     def foo(self):
+#         return self.bar
 
 
 # This is used to enforce constraints when creating classes inheriting the base class
@@ -40,3 +39,18 @@ class Base(metaclass=BaseMeta):
 # import builtins
 
 # builtins.__build_class__ = my_bc
+
+
+# Best way to do it
+
+
+class Base:
+    def foo(self):
+        return self.bar
+
+    def __init_subclass__(cls, **subclass):
+        if not hasattr(cls, "bar"):
+            raise TypeError("Bad user class")
+        else:
+            print("Creating subclass....")
+        super().__init_subclass__(**subclass)

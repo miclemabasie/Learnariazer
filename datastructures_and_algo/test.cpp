@@ -28,7 +28,7 @@ public:
     void set_vars(string b_username, int b_userid, int b_pin, int b_age, float b_balance)
     {
         username = b_username;
-        userid = b_userid;
+        userid = b_age;
         pin = b_pin;
         age = b_age;
         balance = b_balance;

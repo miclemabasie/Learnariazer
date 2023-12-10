@@ -4,7 +4,7 @@ void generate_array(int arr[]);
 void show_array(int arr[]);
 void insertion_sort(int arr[]);
 
-int size = 50;
+int size = 10;
 
 int main(void)
 {
@@ -40,12 +40,21 @@ void insertion_sort(int arr[])
     {
         int current = arr[i];
         int j = i - 1;
-
+        // loop through the other part of the list -> (sorted part of the list)
+        // until we meet a number greater than current
+        // Less than (incase of ascending order)
         while (j >= 0 && current > arr[j])
         {
+            // printf("[ ");
+            // for (int i = 0; i < size; i++)
+            // {
+            //     printf("%d ", arr[i]);
+            // }
+            // printf("]\n");
             arr[j + 1] = arr[j];
             j--;
         }
+        // Fit the number into the last posion j + 1
         arr[j + 1] = current;
     }
 }

@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 void merge(int arr[], int left, int mid, int right)
 {
     int i, j, k;
@@ -47,12 +49,15 @@ void merge(int arr[], int left, int mid, int right)
 
 void merge_sort(int arr[], int left, int right)
 {
-    if (left < right)
+    int l = right - left;
+    if (l > 2)
     {
 
         // finding the mid value of the array.
         // int mid = l + (right - left) / 2;
+        printf("This is the left %d and this is the right %d \n ", left, right);
         int mid = (right - left) / 2;
+        printf("This is the midindex %d\n", mid);
 
         // Calling the merge sort for the first half
         merge_sort(arr, left, mid);

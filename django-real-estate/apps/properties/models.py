@@ -85,7 +85,7 @@ class Property(TimeStampedUUIDModel):
         verbose_name=_("Numbor of Floors"), default=0
     )
     bathrooms = models.PositiveIntegerField(verbose_name=_("Bathrooms"), default=0)
-    avert_type = models.CharField(
+    advert_type = models.CharField(
         verbose_name=_("Avert Type"),
         max_length=50,
         choices=AvertTypeChoices.choices,
@@ -132,9 +132,6 @@ class Property(TimeStampedUUIDModel):
 
     currency = models.CharField(
         verbose_name=_("Currency"), max_length=3, default="USD", null=True, blank=True
-    )
-    address = models.CharField(
-        verbose_name=_("Address"), max_length=255, null=True, blank=True
     )
     garages = models.PositiveIntegerField(
         verbose_name=_("Garages"), default=0, null=True, blank=True

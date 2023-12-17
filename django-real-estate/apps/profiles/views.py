@@ -14,7 +14,6 @@ from rest_framework.permissions import IsAuthenticated
 class AgentListAPIView(generics.ListAPIView):
     renderer_classes = (ProfileJSONRenderer,)
     serializer_class = ProfileSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None):
         agents = Profile.objects.filter(is_agent=True)
@@ -34,9 +33,8 @@ def agent_list_api_view(request):
 
 
 class TopAgentsListAPIView(generics.ListAPIView):
-    renderer_classes = (ProfileJSONRenderer,)
+    renderer_classes = [ProfileJSONRenderer]
     serializer_class = ProfileSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None):
         agents = Profile.objects.filter(top_agent=True)
@@ -63,9 +61,9 @@ class GetProfileAPIView(APIView):
 
 
 class ProfileUpdateAPIView(APIView):
-    renderer_classes = (ProfileJSONRenderer,)
+    renderer_classes = [ProfileJSONRenderer]
     serializer_class = UpdateProfileSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
     # def put(self, request, format=None):
     #     serializer = self.serializer_class(
@@ -79,11 +77,11 @@ class ProfileUpdateAPIView(APIView):
         try:
             profile = Profile.objects.get(user__username=username)
         except Profile.DoesNotExist:
-            raise ProfileDoesNotExist
+            raise ProfileDoesNotExist("Profile does not exist")
 
         user_name = request.user.username
         if user_name != username:
-            raise NotYourProfileError
+            raise NotYourProfileError("Not your profile to update")
 
         serializer = self.serializer_class(
             instance=request.user.profile, data=request.data, partial=True

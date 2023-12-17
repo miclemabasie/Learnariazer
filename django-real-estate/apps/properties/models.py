@@ -104,7 +104,7 @@ class Property(TimeStampedUUIDModel):
         null=True,
         blank=True,
     )
-    photo1 = models.ImageField(
+    photo_1 = models.ImageField(
         verbose_name=_("Main Photo"),
         upload_to="photos",
         default="/interior_sample.jpg",
@@ -112,7 +112,7 @@ class Property(TimeStampedUUIDModel):
         blank=True,
     )
 
-    photo2 = models.ImageField(
+    photo_2 = models.ImageField(
         verbose_name=_("Main Photo"),
         upload_to="photos",
         default="/interior_sample.jpg",
@@ -120,7 +120,7 @@ class Property(TimeStampedUUIDModel):
         blank=True,
     )
 
-    photo3 = models.ImageField(
+    photo_3 = models.ImageField(
         verbose_name=_("Main Photo"),
         upload_to="photos",
         default="/interior_sample.jpg",
@@ -169,7 +169,7 @@ class Property(TimeStampedUUIDModel):
     def save(self, *args, **kwargs):
         """Save method for Property. modify the ref_code field using random string from string library"""
         self.title = str.title(self.title)
-        self.description = str.description(self.description)
+        self.description = str.capitalize(self.description)
         self.ref_code = "REF-"
         self.ref_code += "".join(
             random.choices(string.ascii_uppercase + string.digits, k=10)
@@ -177,7 +177,7 @@ class Property(TimeStampedUUIDModel):
         super(Property, self).save(*args, **kwargs)
 
     @property
-    def final_propery_price(self):
+    def final_property_price(self):
         """Return the final price of the property after tax"""
         tax_percentage = self.tax
         property_price = self.price

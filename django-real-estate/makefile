@@ -31,11 +31,18 @@ createsuperuser:
 collecstatic:
 	docker-compose exec api python manage.py collectstatic --no-input --clear
 
+django-check:
+	docker-compose exec api python manage.py check
+
+shell:	
+	docker-compose exec api python manage.py shell
+
 down-v:
 	docker-compose down -v 
 
 volume:
 	docker volume inspect django-real-estate_postgres_data
+
 
 estate-db:
 	docker-compose exec postgres-db psql -U miclem -d realestate_learn
@@ -44,7 +51,7 @@ test:
 	docker-compose exec api pytest -p no:warnings --cov=.
 
 test-html:
-	docker-compose exec api pytest -p no:warnings --cov=. --cov-report=html
+	docker-compose exec api pytest -p no:warnings --cov=. --cov-report html
 
 flake8:
 	docker-compose exec api flake8

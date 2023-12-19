@@ -47,7 +47,6 @@ def create_agent_review(request, profile_id):
             "error": "Please select a rating",
         }
         return Response(formatted_response, status=status.HTTP_400_BAD_REQUEST)
-
     else:
         review = Rating.objects.create(
             rater=request.user,

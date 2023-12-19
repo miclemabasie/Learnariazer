@@ -23,11 +23,13 @@ class CustomUserManager(BaseUserManager):
         Create and save a user with the given email and password.
         """
         if not username:
-            raise ValueError(_("User must submit a username"))
+            raise ValueError(_("User must have a username"))
         if not first_name:
-            raise ValueError(_("User must submit a first name"))
+            raise ValueError(_("User must have a first name"))
         if not last_name:
-            raise ValueError(_("User must submit a last name"))
+            raise ValueError(_("User must have a last name"))
+        if not password:
+            raise ValueError(_("User must have a password"))
         if email:
             email = self.normalize_email(email)
             self.email_validator(email)

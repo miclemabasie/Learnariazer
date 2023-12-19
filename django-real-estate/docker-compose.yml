@@ -12,8 +12,8 @@ services:
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
       # - ./docker/local/django/start.sh:/start.sh
-    ports:
-      - 8000:8000
+      # ports:
+      #   - 8000:8000
     env_file:
       - .env
     depends_on:
@@ -31,6 +31,21 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+    networks:
+      - estate-react-network
+  # nginx: configuration for nginx
+  nginx:
+    restart: always
+    depends_on:
+      - api
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    build:
+      context: ./docker/local/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
     networks:
       - estate-react-network
 

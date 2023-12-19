@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .exceptions import ProfileDoesNotExist, NotYourProfileError
+from .exceptions import NotYourProfileError, ProfileDoesNotExist
 from .models import Profile
 from .renderers import ProfileJSONRenderer
 from .serializers import ProfileSerializer, UpdateProfileSerializer
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
 
 
 class AgentListAPIView(generics.ListAPIView):

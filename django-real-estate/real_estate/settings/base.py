@@ -1,6 +1,7 @@
-import environ
 from pathlib import Path
+from datetime import timedelta
 
+import environ
 
 env = environ.Env(DEBUG=(bool, False))
 
@@ -63,7 +64,6 @@ REST_FRAMEWORK = {
     )
 }
 
-from datetime import timedelta
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": (
@@ -196,6 +196,7 @@ AUTH_USER_MODEL = "users.User"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 import logging
 import logging.config
+
 from django.utils.log import DEFAULT_LOGGING
 
 logger = logging.getLogger(__name__)

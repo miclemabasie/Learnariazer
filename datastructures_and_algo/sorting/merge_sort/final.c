@@ -42,7 +42,6 @@ void merge(int arr[], int left, int mid, int right)
     int left_size = mid - left + 1;
     int right_size = right - mid;
     show_array(arr, 5, "this is the main array");
-
     // initialize the arrays based on the sizes calculated above
     int left_arr[left_size];
     int right_arr[right_size];
@@ -58,10 +57,8 @@ void merge(int arr[], int left, int mid, int right)
     {
         right_arr[j] = arr[mid + j + 1];
     }
-
     show_array(left_arr, left_size, "Left array");
     show_array(right_arr, right_size, "right array");
-
     // We now have a splited array [1, 2, 3,4], [5, 6, 7, 8]
     // Copy the contents of the temporal arrays into the main array in a sorted manner
     int left_index = 0;
@@ -86,40 +83,9 @@ void merge(int arr[], int left, int mid, int right)
         }
         k++;
     }
-    // // Merge the temporary arrays back into arr[low..high]
-    // while (i < left_size && j < right_size)
-    // {
-    //     if (left_arr[i] <= right_arr[j])
-    //     {
-    //         arr[k] = left_arr[i];
-    //         i++;
-    //     }
-    //     else
-    //     {
-    //         arr[k] = right_arr[j];
-    //         j++;
-    //     }
-    //     k++;
-    // }
 
     show_array(arr, 5, "this is the main array");
 
-    // Copy the left over content of any in both arrays to the main array
-    // while (left_index < right_size)
-    // {
-    //     *(arr + arr_index) = left_arr[left_index];
-    //     arr_index++;
-    //     left_index++;
-    // }
-
-    // while (right_index < right_size)
-    // {
-    //     *(arr + arr_index) = right_arr[right_index];
-    //     arr_index++;
-    //     right_index++;
-    // }
-
-    // Copy remaining elements of left_arr
     while (i < left_size)
     {
         arr[k] = left_arr[i];

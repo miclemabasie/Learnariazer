@@ -43,7 +43,7 @@ void insertion_sort(int arr[])
         // loop through the other part of the list -> (sorted part of the list)
         // until we meet a number greater than current
         // Less than (incase of ascending order)
-        while (j >= 0 && current > arr[j])
+        while (j >= 0 && current < arr[j])
         {
             // printf("[ ");
             // for (int i = 0; i < size; i++)

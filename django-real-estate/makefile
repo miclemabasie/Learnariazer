@@ -76,3 +76,7 @@ isort:
 
 lint: 
 	flake8 black-check isort-check
+
+
+watch:
+	docker-compose exec api watchmedo shell-command --patterns="*.py" --recursive --command='make lint test' .

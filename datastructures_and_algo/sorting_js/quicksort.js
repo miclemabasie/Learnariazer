@@ -1,9 +1,13 @@
 // Function to create a list of random intergers
-function generate_random_ints() {
-    let numbers = [];
-    for (let i = 0; i < 100; i++) {
-        numbers.push(Math.round(Math.random() * 100));
+function generate_random_ints(size) {
+    let numbers = []
+    for (let i = 0; i < size; i++) {
+        let num = Math.round(Math.random() * size);
+        if (!(num in numbers)) {
+            numbers.push(num);
+        }
     }
+    // Clean redundant data from the array
     return numbers;
 }
 
@@ -16,8 +20,6 @@ function quick_sort(arr, start, end) {
         quick_sort(arr, pivot + 1, end);
     }
 }
-
-
 
 
 function partition(arr, start, end) {
@@ -42,11 +44,11 @@ function swap(arr, i, j) {
 }
 
 
-// let arr = generate_random_ints();
-let arr = [7, 2, 1, 6, 8, 5, 3, 4]
 
+
+let new_arr = generate_random_ints(100)
 // function to show array contents
-console.log("before sort", arr);
-quick_sort(arr, 0, 7);
-console.log("After sort", arr);
+console.log("before sort", new_arr);
+quick_sort(new_arr, 0, new_arr.length - 1);
+console.log("After sort", new_arr);
 // Function to sort the list of random intergers

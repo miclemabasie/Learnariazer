@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Abasie Ngoh Miclem</title>
+    <style>
+        h5 {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+
+    <script>
+        function addDigitToScreen(digit) {
+            document.getElementById('display').value += digit;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function add() {
+            document.getElementById('display').value += '+';
+        }
+
+        function evaluateInput() {
+            let stringContent = document.getElementById('display').value
+            let res = eval(stringContent)
+            document.getElementById('display').value = res;
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <table border="1" width="400" align="center">
+        <colgroup>
+            <col style="width: 25%; max-width: 100px;">
+            <col style="width: 25%; max-width: 100px;">
+            <col style="width: 25%; max-width: 100px;">
+            <col style="width: 25%; max-width: 100px;">
+        </colgroup>
+        <tr>
+            <td colspan="4">
+                <center>
+                    <h5>HND SWE Level 300 simple adder</h4>
+                </center>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><input type="text" id="display" style="width: 97%;" disabled></td>
+        </tr>
+        <tr>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(7)">7</button></center>
+            </td>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(8)">8</button></center>
+            </td>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(9)">9</button></center>
+            </td>
+            <td rowspan="3">
+                <p>Done by Abasie</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(4)">4</button></center>
+            </td>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(5)">5</button></center>
+            </td>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(6)">6</button></center>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(1)">1</button></center>
+            </td>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(2)">2</button></center>
+            </td>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(3)">3</button></center>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <center><button style="width: 90%;" onclick="addDigitToScreen(0)">0</button></center>
+            </td>
+            <td>
+                <center><input value="clear" type="button" style="width: 90%;" onclick="clearDisplay()"></center>
+            </td>
+
+            <td>
+                <center><button style="width: 90%;" onclick="add()">+</button></center>
+            </td>
+            <td>
+                <center><button style="width: 90%;" onclick="evaluateInput()">=</button></center>
+            </td>
+        </tr>
+    </table>
+
+
+
+</body>
+
+</html>

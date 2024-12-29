@@ -8,122 +8,132 @@
 - Easy Testing
 
 ### DOCKER IMAGE
+
 - An Image is a template for creating an environment of your choice
 - It is also a snapshot of a particular image
 - Has everything needed to run the application
 - OS, Software, App Code ...
 
 ### CONTAINER
+
 - A container is simply a running instance of an image
 
 ### COMMANDS
+
 Pull and image from docker hub repository
- ```docker pull <imagename>:<tag>```
+`docker pull <imagename>:<tag>`
 
 See the list of images in the system
-```docker images```
+`docker images`
 This command shows the following information about the image
 (REPOSITORY, TAG, IMAGE iD, CREATED, SIZE)
 
 Running a container from an image -> See defination of a container above
-```docker run <imagename>:<tag>``` 
-```docker run -d <imagename><tag>``` The ```-d``` flag here means to run in detached mood (release the shell and run on the background)
+`docker run <imagename>:<tag>`
+`docker run -d <imagename><tag>` The `-d` flag here means to run in detached mood (release the shell and run on the background)
 
 The above command starts up the container but produces no output with no output
 
-
 To see the list of running images we can use the following command
-```docker container ls```
+`docker container ls`
 OR
-```docker ps```
-```docker ps -a``` The  ```a``` flag here means, all the images should be displayed regarless of their status
-
+`docker ps`
+`docker ps -a` The `a` flag here means, all the images should be displayed regarless of their status
 
 To stop a container we use the following command
-```docker stop <containerID>``` Note that the container ID is displayed when we use the command ```docker ps```
+`docker stop <containerID>` Note that the container ID is displayed when we use the command `docker ps`
 
 ### EXPOSING PORTS
+
 In the case of running a webserver such as NGINX on a docker container, we need a way to communicate with server software running inside the container, since NGINX is a webserver and runs on port 80 we can map a port on our local machine which when a requests is made through that port, the request is sent to the NGINX server
 
-#### localhost:8080 
+#### localhost:8080
+
 #### Port 8080 on host maps to 80 in the NGINX container.
 
-This configuration is obtained by adding  ```-p 8080:80``` when running the container 
-So we get a command that looks like this ```docker run -d -p 8080:80 nginx:latest```
+This configuration is obtained by adding `-p 8080:80` when running the container
+So we get a command that looks like this `docker run -d -p 8080:80 nginx:latest`
 
-The following command maps port two different ports to the NGINX server
-```docker run -d -p 3000:80 -p 8080:80 nginx:latest``` 
+The following command maps two different ports to the NGINX server
+`docker run -d -p 3000:80 -p 8080:80 nginx:latest`
 
 ### Managing Containers
-- ```docker ps``` Display running containers.
-- ```docker ps -a``` Display all containers.
-- ```docker stop <containerID>``` Stopping a container but not removing it.
-- ```docker start <containerID>``` running a container that had been earlear stoped .
-- ```docker rm <containerID>``` Removes containers that have been stopped .
-- ```docker ps -aq``` Retuns the IDs of all the containers.
-- ```docker rm $(docker ps -aq)``` This will remove all the containers that are not avaible (and not running).
-If we try to remove a running container using the above command we get an error, in this case if we do not mind proceding with the removal then we type:
-- ```docker rm -f <containerID```
-OR
-- ```docker rm -f $(docker ps -aq)``` This command removes every container (Running or Stopped) status
+
+- `docker ps` Display running containers.
+- `docker ps -a` Display all containers.
+- `docker stop <containerID>` Stopping a container but not removing it.
+- `docker start <containerID>` running a container that had been earlear stoped .
+- `docker rm <containerID>` Removes containers that have been stopped .
+- `docker ps -aq` Retuns the IDs of all the containers.
+- `docker rm $(docker ps -aq)` This will remove all the containers that are not avaible (and not running).
+  If we try to remove a running container using the above command we get an error, in this case if we do not mind proceding with the removal then we type:
+- `docker rm -f <containerID`
+  OR
+- `docker rm -f $(docker ps -aq)` This command removes every container (Running or Stopped) status
 
 ### NAMING CONTAINERS
+
 By default, random names are given to every container when you run them without specifying a name.
 To specify a name during the running of a container, we do:
-```docker run --name website -d -p 3000:80 -p 8080:80 nginx:latest```
+`docker run --name website -d -p 3000:80 -p 8080:80 nginx:latest`
 So now we can run commands against this container using it's name
-```docker stop website```
+`docker stop website`
 
 #### Using formats for output
-```docker ps --format="check docker display format online and paste here."```
 
+`docker ps --format="check docker display format online and paste here."`
 
 ### DOCKER VOLUMES
+
 Docker volumes are a mechanism that allows us to share data (files and or folders) between host and container and also between containers.
 
 #### Mouting a volumbe from host to the container
-```docker run --name website -v $(pwd):/usr/share/nginx/html:ro -d -p 8080:80 nginx```
 
-##### Breaking down the command 
-- ```docker run``` This command simply starts up the container
-- ```--name website``` This flag is used to give a custom name to the running command
-- ```-v $(pwd):/usr/share/nginx/html:ro ``` This is to mount a volume in the container
-  - ```-v``` This flag tells the docker that  volum is to be mounted
-  - ```$(pwd)``` This returns the current path of the system such as ```/home/electron/Dev/recoverlearn/Learnariazer/docker``` on the host machine which holds the folder to be loaded into the volum.
-  - ```:usr/share/nginx/html``` This is to specify where on the container we want to mount the volum or store the contents
-  - ```:ro``` This represents a read only volum
-- ```-d``` Run the container in detatched mode
-- ```-p 8080:80``` Map port 8080 from the host machine to port 80 on the container
-- ```nginx``` The name of the container we wish to run.
+`docker run --name website -v $(pwd):/usr/share/nginx/html:ro -d -p 8080:80 nginx`
+
+##### Breaking down the command
+
+- `docker run` This command simply starts up the container
+- `--name website` This flag is used to give a custom name to the running command
+- `-v $(pwd):/usr/share/nginx/html:ro ` This is to mount a volume in the container
+  - `-v` This flag tells the docker that volum is to be mounted
+  - `$(pwd)` This returns the current path of the system such as `/home/electron/Dev/recoverlearn/Learnariazer/docker` on the host machine which holds the folder to be loaded into the volum.
+  - `:usr/share/nginx/html` This is to specify where on the container we want to mount the volum or store the contents
+  - `:ro` This represents a read only volum
+- `-d` Run the container in detatched mode
+- `-p 8080:80` Map port 8080 from the host machine to port 80 on the container
+- `nginx` The name of the container we wish to run.
 
 With this configuration all the files in this folder specified in the volume will authomatically be present inside the container and all the files in the conatiner in the path specified as destination in the command will authomatically be present in the host machine aswell
 
 To confirm this, we can go into the shell of the terminal itself and create new files and see how it works, to do so we use the following command
 
-```docker exec -it website bash```
+`docker exec -it website bash`
 
-If this command works properly we are then given a shell, in which we can navigate to ```usr/share/nginx/html```
-using ```cd /usr/share/nginx/html```
+If this command works properly we are then given a shell, in which we can navigate to `usr/share/nginx/html`
+using `cd /usr/share/nginx/html`
 
-it should be noted that volumes created with the ```ro``` options will not allow the container to write any content to the volume, if we dont like this configuration then we can remove the ```ro``` before running the container which will make it look like this.
-```docker run --name website -v $(pwd):/usr/share/nginx/html -d -p 8080:80 nginx```
+it should be noted that volumes created with the `ro` options will not allow the container to write any content to the volume, if we dont like this configuration then we can remove the `ro` before running the container which will make it look like this.
+`docker run --name website -v $(pwd):/usr/share/nginx/html -d -p 8080:80 nginx`
 
 ### Sharing Volumes Between Containers
+
 Docker provides us a need way of specifying which a volume to be loaded from another existing container during the run process of the container
 
-```docker rum --name website-copy --volumes-from website -d -p 3000:80 nginx```
+`docker rum --name website-copy --volumes-from website -d -p 3000:80 nginx`
 
 This command starts up a container with the volume from the another container called website.
 
-
 ## DOCKERFILE
-A dockerfile allows us to create our own images by creating a file called ```dockerfile```
+
+A dockerfile allows us to create our own images by creating a file called `dockerfile`
 This file simply contains a list of instructions on an image is to be created
 After this is done we can run the images the same way we've been running those downloaded from docker hub such as nginx
 
 #### consult the dockerfile reference for more information on this, see example below
 
 #### File Structure of our website
+
 - Website
   - images
   - css
@@ -132,19 +142,22 @@ After this is done we can run the images the same way we've been running those d
   - dockerfile
 
 When mounting a volume we are simple referencing some content inside our host machine to be used by the container, and this must be done everytime the container is to be started up.
-To avoid this we can build our own custom image which has all the things it need to server out website propery and is completely on it's own on all the information we need, we do this copying the content from out machine into the container this is seen in the example below 
+To avoid this we can build our own custom image which has all the things it need to server out website propery and is completely on it's own on all the information we need, we do this copying the content from out machine into the container this is seen in the example below
 
-Inside ```website/dockerfile```
+Inside `website/dockerfile`
+
 ```
 FROM nginx:latest
 COPY . /usr/share/nginx/html/
 ```
 
 After creating this file we need to build the image
-```docker build --tag website:latest .```
+`docker build --tag website:latest .`
 
 ### EXAMPLE OF DOCKFILES IN NODEJS AND EXPRESS CONFIGURATION
+
 The following is a sample configuration for a node/express dockerfile which is is at it bear mininum.
+
 ```
 FROM node:latest
 # If there exist a directory called app, use it, otherwise create a new one
@@ -154,20 +167,23 @@ RUN npm install
 CMD node server.mjs
 
 ```
+
 We use the following command to build an image from the above configuration
-```docker build -t user-api-service .``` The dot at the end of the command indicates where the dockerfile is located with respect to our current location on the file system
+`docker build -t user-api-service .` The dot at the end of the command indicates where the dockerfile is located with respect to our current location on the file system
 
 The above command will create an image with the name 'user-api-service'
 
 Running a container from this image
-```docker run --name user-api -d -p 3000:3000 user-api-service:latests```
-Now run ```docker ps``` to see the list of running images
-You should see and image with name ```user-api``` listening on port 3000
+`docker run --name user-api -d -p 3000:3000 user-api-service:latests`
+Now run `docker ps` to see the list of running images
+You should see and image with name `user-api` listening on port 3000
 
-### DOCKERIGNORE 
-There are usualy certain files we wish to ignore when building images with docker, these includes files such as project dependencies which will be installed when the project is started such as the ```node_modules``` folder in our case of node/express 
+### DOCKERIGNORE
 
-To avoid this we create a new file in out project directory called ```.dockerignore``` it shoud have the following content (as an example)
+There are usualy certain files we wish to ignore when building images with docker, these includes files such as project dependencies which will be installed when the project is started such as the `node_modules` folder in our case of node/express
+
+To avoid this we create a new file in out project directory called `.dockerignore` it shoud have the following content (as an example)
+
 ```
 node_modules
 Dockerfile
@@ -178,9 +194,11 @@ Dockerfile
 All the files specified inside the dockerignore file and the those on the project directory that match the wildcat property will be aswell excluded from the docker build
 
 #### Using and Understanding how Caching works in Docker
-In a simple docker configuration, whenever a change is made to our code, docker has to recompute  every step that is after the COPY or ADD command which can be very time consuming this is where we take avantage of caching
+
+In a simple docker configuration, whenever a change is made to our code, docker has to recompute every step that is after the COPY or ADD command which can be very time consuming this is where we take avantage of caching
 
 This is achieved by rearanging the content in out dockerfile in a very logical set of layers, the following is a sample configuration that will be very effective and elimnate the need of reinstalling project dependencies every time we make change
+
 ```
 FROM node:alpine
 # If there exist a directory called app, use it, otherwise create a new one
@@ -190,14 +208,17 @@ RUN npm install
 COPY . /app
 CMD node server.mjs
 ```
-In the above configuration notice how we first now copy the package*.json which will include all the dependencies that needs to be installed, before we add the project, this because Docker works in layers when we build an image, it only changes all the content below the command that changed when we rebuild every image, in this scenario we are trying to put the ```COPY . /app``` statement below the ```npm install``` so that when the code changes, and we copy the code into the container again then docker would register a change at this stage and would not have to reinstall all dependencies.
+
+In the above configuration notice how we first now copy the package\*.json which will include all the dependencies that needs to be installed, before we add the project, this because Docker works in layers when we build an image, it only changes all the content below the command that changed when we rebuild every image, in this scenario we are trying to put the `COPY . /app` statement below the `npm install` so that when the code changes, and we copy the code into the container again then docker would register a change at this stage and would not have to reinstall all dependencies.
 
 ### ALPINE
+
 This are linux distribution of images which are quite small in size compared to the regular images
 To obtain this distribution we simply specify alpine as the tag of the image, such as:
-```docker pull node:lts-alpine``` The available tags can be found on the node repo in the docker hub.
-```docker pull nginx:alpine```
+`docker pull node:lts-alpine` The available tags can be found on the node repo in the docker hub.
+`docker pull nginx:alpine`
 Read more about alpine [here](www.alpinelinux.org)
+
 ### Making custom images to use alpine versions
 
 ```
@@ -208,44 +229,48 @@ COPY . /app
 RUN npm install
 CMD node server.mjs
 ```
+
 Note that the code above pulls an alpine version of the node image as it's base image.
 
-
 ### TAGS AND VERSIONING
+
 - Allows you to control image versions
 - Avoid breaking changes, due to changes in software versions
-  
-```docker pull node:alpine``` imagine this pulls version 8
-```docker pull node:alpine``` and this pulls version 12
+
+`docker pull node:alpine` imagine this pulls version 8
+`docker pull node:alpine` and this pulls version 12
 This all could potentially lead to breaking your code base due to changes in software dependencies
 This is where tags and version comes in to save the day, which gives us full control of the exact images we are working with
-```docker pull node:12-alpine```
+`docker pull node:12-alpine`
 
 #### Adding tags to images when we build them
+
 To add a tag to an image when it's been build we do the following
-```docker build -t <image-name>:<tagname> <dockerfile>```
-```-t``` Allows you to specify a tag which does the same as ```--tag``` below.
-or 
-```docker build -t <image-name>:<tagname> <dockerfile>```
+`docker build -t <image-name>:<tagname> <dockerfile>`
+`-t` Allows you to specify a tag which does the same as `--tag` below.
+or
+`docker build -t <image-name>:<tagname> <dockerfile>`
 
 #### EXamples of tagging
-1. We buid the image
-   ```docker buid -t miclem-website:latest```
-2. We create a new image with a tag base off the newly created build
-   ```docker tag miclem-website:latest miclem-website:1``` 
-3. After making some changes to the website and we wish to release version two
-   ```docker buid -t miclem-website:latest```
-   ```docker tag miclem-website:latest miclem-website:2``` 
 
-So this means we have 3 containers 
+1. We buid the image
+   `docker buid -t miclem-website:latest`
+2. We create a new image with a tag base off the newly created build
+   `docker tag miclem-website:latest miclem-website:1`
+3. After making some changes to the website and we wish to release version two
+   `docker buid -t miclem-website:latest`
+   `docker tag miclem-website:latest miclem-website:2`
+
+So this means we have 3 containers
+
 - miclem-website:latest
 - miclem-website:1
 - miclem-website:2
 
-Note that ```:latest``` always points to the the most recent version of the website just as ```:2```
-
+Note that `:latest` always points to the the most recent version of the website just as `:2`
 
 #### Dockerfile
+
 ```
 FROM node:12.7.0-alpine
 # If there exist a directory called app, use it, otherwise create a new one
@@ -256,6 +281,7 @@ CMD node server.mjs
 ```
 
 ### DOCKER REGISTRY
+
 This is a scalable server side application that stores and lets you distribute Docker images
 Also used for CD/CI Pipeline
 Run your applications
@@ -265,6 +291,7 @@ Private Images are used when we want the images to only be seen and used by use 
 Public Images are used when we don't mind if anybody sees and uses our image
 
 #### Docker Registry providers include:
+
 - [Docker Hub](www.dockerhub.com)
 - [Quay](quay.io)
 - Amazon ECR
@@ -272,36 +299,39 @@ Public Images are used when we don't mind if anybody sees and uses our image
 Most commonly we use the docker hub since it provides us a free plan for pushing and pulling personal images
 
 #### How to push images from our host to repo on docker hub
-Assuming that we have created a docker repository called ```website``` which will be store with our username like this ```miclemabase/website```
-```docker push <username>/<name:tag>```
+
+Assuming that we have created a docker repository called `website` which will be store with our username like this `miclemabase/website`
+`docker push <username>/<name:tag>`
 
 Example
 To push this images we need to properly tag them as per the dockerhub conventions
-```docker tag miclem-website:1 miclemabasie/website:1```
-```docker tag miclem-website:2 miclemabasie/website:2```
-```docker tag miclem-website:latest miclemabasie/website:latest```
+`docker tag miclem-website:1 miclemabasie/website:1`
+`docker tag miclem-website:2 miclemabasie/website:2`
+`docker tag miclem-website:latest miclemabasie/website:latest`
 
 Then we can push them as follows
-```docker login``` Command to login into dockerhub from  the terminal.
+`docker login` Command to login into dockerhub from the terminal.
 
-```docker push miclemabasie/website:1```
-```docker push miclemabasie/website:2```
-```docker push miclemabasie/website:latest```
+`docker push miclemabasie/website:1`
+`docker push miclemabasie/website:2`
+`docker push miclemabasie/website:latest`
 
 ### How to pull own images from dockerhun
-Remove Image if exists
-```docker rmi miclemabasie/website:latest```
-```docker rmi miclemabasie/website:1```
-```docker rmi miclemabasie/website:2```
 
-```docker pull miclemabasie/website``` This woudl authomaticaly pull the latest version
-```docker pull miclemcbasie/website:1``` This pulls the version 1 of the image
+Remove Image if exists
+`docker rmi miclemabasie/website:latest`
+`docker rmi miclemabasie/website:1`
+`docker rmi miclemabasie/website:2`
+
+`docker pull miclemabasie/website` This woudl authomaticaly pull the latest version
+`docker pull miclemcbasie/website:1` This pulls the version 1 of the image
 
 ### DOCKER INSPECT
-The ```docker ps``` command simply gives us some basic information about a container, but sometimes we might want to investigate what is fully going on inside a container, to do this, we use the inspect command:
-```docker inspect <containerID>```
 
-This command produces output that looks like the following 
+The `docker ps` command simply gives us some basic information about a container, but sometimes we might want to investigate what is fully going on inside a container, to do this, we use the inspect command:
+`docker inspect <containerID>`
+
+This command produces output that looks like the following
 
 ```
 [
@@ -583,9 +613,11 @@ This command produces output that looks like the following
 ```
 
 ### DOCKER LOGS
-In the case where we need to actualy see what's going on inside a container this is where logs come in
-```docker logs <containerID>``` something similar should appear below
+
+In the case where we need to actualy see what's going on inside a container this is where logs come ininerID>
+``` something similar should appear below
 This indicates all the information the application has been spitting out during runtime in the case of a server.
+
 ```
 PostgreSQL is up - continuing...
 ################## /app
@@ -601,7 +633,7 @@ Celery worker is up - continuing...
 2023-12-21 12:02:33,178 flower.command WARNING  You have incorrectly specified the following celery arguments after flower command: ['--broker']. Please specify them after celery command instead following this template: celery [celery args] flower [flower args].
 2023-12-21 13:02:34,595 flower.command INFO     Visit me at http://0.0.0.0:5555
 2023-12-21 13:02:34,601 flower.command INFO     Broker: redis://redis:6379/0
-2023-12-21 13:02:34,606 flower.command INFO     Registered tasks: 
+2023-12-21 13:02:34,606 flower.command INFO     Registered tasks:
 ['celery.accumulate',
  'celery.backend_cleanup',
  'celery.chain',
@@ -614,22 +646,25 @@ Celery worker is up - continuing...
  'djcelery_email_send_multiple']
 2023-12-21 13:02:34,615 kombu.mixins INFO     Connected to redis://redis:6379/0
 ```
-```docker logs -f <containerID>``` This is used to follow the logs as see them as there appear
 
+`docker logs -f <containerID>` This is used to follow the logs as see them as there appear
 
 ### DOCKER EXEC
-Since a container is like a running machine, sometimes we might want to get into the container and actualy see what is inside or even install software and perform custom configuration, we use the ```exec``` command to achieve this
 
-```docker exec -it <containerID> bash```
+Since a container is like a running machine, sometimes we might want to get into the container and actualy see what is inside or even install software and perform custom configuration, we use the `exec` command to achieve this
+
+`docker exec -it <containerID> bash`
 OR
-```docker exec -it <container-name> bash```
+`docker exec -it <container-name> bash`
 
 Understanding the options
-- ```-i``` This runs the command in iteractive mode
-- ```-t``` Provides a tty shell for typing commands.
-- ```bash``` This represents where the bash shell in found inside the container 
 
-Note: To find out where exactly the bash terminal is found, we can run the command ```docker inspect <containerID>``` and then search for the "CMD" settings, this would look something like this
+- `-i` This runs the command in iteractive mode
+- `-t` Provides a tty shell for typing commands.
+- `bash` This represents where the bash shell in found inside the container
+
+Note: To find out where exactly the bash terminal is found, we can run the command `docker inspect <containerID>` and then search for the "CMD" settings, this would look something like this
+
 ```
 "Cmd": [
    "/bin/sh",
@@ -638,4 +673,4 @@ Note: To find out where exactly the bash terminal is found, we can run the comma
 ]
 ```
 
-Which in the case above the command to type would now look like this ```docker exec -it <conatinerId> /bin/sh```
+Which in the case above the command to type would now look like this `docker exec -it <conatinerId> /bin/sh`

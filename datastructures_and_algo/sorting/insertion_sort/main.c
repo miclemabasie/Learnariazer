@@ -18,9 +18,9 @@ int main(void)
 
 void generate_array(int arr[])
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 10; i > 0; i--)
     {
-        arr[i] = i + 1;
+        arr[size - i] = i;
     }
 }
 

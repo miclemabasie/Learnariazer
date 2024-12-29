@@ -53,7 +53,7 @@ public:
     }
 
     // post increment
-    void operator++(int)
+    void operator+(int)
     {
         cout << "Price for Car " << make << " is : " << price << endl;
         price++;

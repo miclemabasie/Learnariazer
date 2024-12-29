@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels: # Corrected typo 'labes' to 'labels'
+    app: nginx
+spec:
+  replicas: # Corrected typo 'relicas' to 'replicas'
+    2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx # Added space after '-'
+          image: nginx:1.25
+          ports:
+            - containerPort: 80

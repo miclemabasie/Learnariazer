@@ -1,0 +1,15 @@
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1.deps.json
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1.runtimeconfig.json
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1.dll
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1.pdb
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.AssemblyInfoInputs.cache
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.AssemblyInfo.cs
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.csproj.CoreCompileInputs.cache
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.sourcelink.json
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.dll
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/refint/ConsoleApp1.dll
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.pdb
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.genruntimeconfig.cache
+/home/electron/Dev/Learnariazer/C#/ConsoleApp1/obj/Debug/net8.0/ref/ConsoleApp1.dll
